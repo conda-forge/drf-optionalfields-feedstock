@@ -6,20 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/drf-optionalfields-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/drf-optionalfields-{{ version }}.tar.gz
   sha256: f6a6ccb1120e8527f3f7d1b7ffc71100749a29719bc7c41addfb1b49fc6e4b0a
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7,<3.11
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7,<3.11
+    - python >={{ python_min }},<3.11
 
 test:
   imports:
@@ -28,6 +28,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/sideris/drf-optionalfields
